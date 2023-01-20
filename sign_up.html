@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Text input fields</h2>
+
+<!-- <form action="http://localhost:3000/api/sign_up" id="form1" method="POST"> -->
+    <form  id="form1" onsubmit="return false">
+
+    
+  <label for="name">Name</label><br>
+  <input type="varchar" id="name" name="name" value=""><br>
+
+
+<label for="password">password</label><br>   
+  <input type="password" id="password" name="password" value=""><br>
+
+
+  <input type="submit" value="Submit">
+</form>
+<script>
+
+var names = []    
+var f1=document.getElementById("form1")
+f1.addEventListener("submit",function(){
+
+    var url="http://localhost:3000/api/sign_up"
+    var data={
+        "name": document.getElementById("name").value,
+        "password":document.getElementById("password").value 
+    }
+    data = JSON.stringify(data)
+
+    // data = new FormData()
+
+    // data.append("name",document.getElementById("name").value)
+    // data.append("password",document.getElementById("password").value)
+
+  var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if(this.readyState === 4){
+            // alert(this.responseText)
+            var rd = JSON.parse(this.responseText);
+            var insertID = rd["insertId"]
+            if(insertID){
+                alert(insertID);
+                sessionStorage.setItem("user_id",insertID);
+                window.location.href = "product_list.html";
+
+            }
+        }
+        
+    }
+    
+    // xhttp.setRequestHeader("Content-Type", "multipart/form-data");
+xhttp.open("POST",url, true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(data);
+
+
+
+
+}  )
+
+
+
+</script>
+
+
+</body>
+</html>

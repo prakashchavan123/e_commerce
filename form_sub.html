@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Text input fields</h2>
+
+<form action="http://localhost:3000/api/employees" method="POST">
+    
+  <label for="id">Id:</label><br>
+  <input type="int" id="id" name="id" value=""><br>
+
+
+<label for="name">Name:</label><br>   
+  <input type="varchar" id="name" name="name" value=""><br>
+
+<label for="dob">DOB:</label><br>   
+<input type="varchar" id="dob" name="dob" value=""><br>
+
+<label for="address">address:</label> <br>
+  <input type="varchar" placeholder="address" id="address" name="address" value=""> <br>
+
+
+  <input type="submit" value="Submit">
+</form>
+
+<p>Note that the form itself is not visible.</p>
+
+<p>Also note that the default width of text input fields is 20 characters.</p>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="mystyle.css">
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+  <body>
+    <p id="demo"></p>
+    <!-- <button type="button" id="button1">Click Me!</button> -->
+    <table id="table1"></table>
+    <h2>A basic HTML table</h2>
+   <table style="width:100%">
+    </table>
+    <script>
+      function apihit(url){
+        // var url="http://localhost/prakash/api.txt"
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            r = JSON.parse(this.responseText);
+            console.log(r)
+            for (i =0 ; i<r["data"]["skus"].length; i++) {
+              add = add + "<tr>"
+                // for(j=0;j<;j=j+1)
+                // {
+                //     if(j==1){
+                //             continue
+                //     }
+                //     add=add+"< td > "+ b[i][j] +" < /td>"
+              // }
+              add = add + " <td> "+ r["data"]["skus"][i]["name"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["manufacturer_name"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["price"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["type"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["pack_size_label"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["sku_id"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["available"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["is_discontinued"]+" </td>"
+              // add=add+"  <td> "+ r[i]["Location"] +" < /td>"
+              add = add + " </tr>"
+            }
+            t1.innerHTML = add;
+          }
+        }
+        xhttp.open("GET",url , true);
+        xhttp.send();
+
+      }
+      function onloadtable(){
+        // var b1 = document.getElementById("button1");
+      // b1.addEventListener("click", function() {
+        // alert("hi")
+        var t1 = document.getElementById("table1");
+        // add="  <tr> <td> Prakash </td> <td> Mangesh </td> </tr> <tr> <td> Arvind </td> <td> Amar </td> </tr>";
+        add = "";
+        // var r=[ ["Prakash",7021,"kurla","vtn"],["Sonu",9879,"chembur","smt"], ["mangesh",4567,"tilaknagar","dfi"] 
+        // var r=[{"Name":"Prakash","No":67687,"Location":"Kurla"},{"Name":"Sonu","No":66875,"Location":"Chembur"}]
+        var r = null
+        var url1 = "https://www.1mg.com/pharmacy_api_gateway/v4/drug_skus/by_prefix?prefix_term=b&page=2&per_page=30https://www.1mg.com/pharmacy_api_gateway/v4/drug_skus/by_prefix?prefix_term=b&page=2&per_page=30"
+       var url= "http://localhost/prakash/api.txt"
+      //  apihit()
+       apihit(url)
+
+      //  url="xyz"
+      //  apihit(url1)
+      //  apihit("xyz")
+        
+      }
+      onloadtable()
+      
+    </script>
+  </body>
+</html>

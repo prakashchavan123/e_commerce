@@ -1,0 +1,87 @@
+  <!DOCTYPE html>
+<html>
+<body>
+<table id="product_list">
+    
+</table>
+<script>
+  var products_name = []
+  var products_price = []
+    function apihit(url){
+      var t1 = document.getElementById("product_list");
+      var b1 = document.getElementById("button1");
+      var url= "http://localhost:3000/api/product_list"
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          r = JSON.parse(this.responseText);
+          console.log(r)
+          add=""
+          for (i =0 ; i<r.length; i++) {
+           
+            temp_add = "<tr>\
+                <td>" + r[i]["id"]+ "</td>\
+                <td>" + r[i]["product_name"]+ "</td>\
+                <td>" + r[i]["price"]+ "</td>\
+                <td> <button name='add_cart' value='"+r[i]["id"] +"'> Add</button> </td>\
+                 </tr>"
+            add = add + temp_add;
+          }
+          t1.innerHTML = add;
+
+          let btns = document.querySelectorAll('button[name=add_cart]');
+          // let btns = document.querySelectorAll('.add_cart');
+          console.log("btns =",btns)
+          for (i of btns) {
+            console.log("i =",i)
+            i.addEventListener('click', function() {
+              console.log(this);
+              console.log(this.value)
+              let user_id = sessionStorage.getItem("user_id");
+              var url="http://localhost:3000/api/cart_list"
+              data = {
+                "product_id":this.value,
+                "user_id":user_id
+               
+              }
+              data = JSON.stringify(data)
+
+              // alert("hi")
+              // console.log("url",url,data)
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                console.log("state change")
+                  if(this.readyState === 4){
+                      // alert(this.responseText)
+                      var rd = JSON.parse(this.responseText);
+                      var insertID = rd["insertId"]
+                      if(insertID){
+                    
+                          alert(insertID);
+                          window.location.href = "cart_list.html";
+
+                      }
+                  }
+                  
+                }
+              xhttp.open("POST",url, true);
+              xhttp.setRequestHeader("Content-Type", "application/json");
+              xhttp.send(data);
+
+
+	            });
+          }  
+
+        }
+      }
+      xhttp.open("GET",url , true);
+      xhttp.send();
+
+    }
+    var url= "http://localhost:3000/api/product_list"
+  apihit(url)
+   </script>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="mystyle.css">
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+  <table>
+<tr>
+    <td>Prakash</td>
+    <td>Sonu</td>
+    <td>Mangesh</td>
+</tr>
+<tr>
+    <td>Arvind</td>
+    <td>Amar</td>
+    <td>Akash</td>
+</tr>
+<tr>
+    <td>Prakash</td>
+    <td>Sonu</td>
+    <td>Mangesh</td>
+</tr>
+<tr>
+    <td>Prakash</td>
+    <td>Sonu</td>
+    <td>Mangesh</td>
+</tr>
+<tr>
+    <td>Prakash</td>
+    <td>Sonu</td>
+    <td>Mangesh</td>
+</tr>
+
+
+
+
+
+
+
+
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    r = JSON.parse(this.responseText);
+    console.log(r)
+    for (i =0 ; i<r["data"]["skus"].length; i++) {
+        add = add + "<tr>
+            add = add + " <td> "+ r["data"]["skus"][i]["name"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["manufacturer_name"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["price"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["type"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["pack_size_label"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["sku_id"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["available"]+" </td>"
+              add = add + " <td> "+ r["data"]["skus"][i]["is_discontinued"]+" </td>"
+              // add=add+"  <td> "+ r[i]["Location"] +" </td>"
+              add = add + " </tr>"
+            }
+            t1.innerHTML = add;
+          }
+        }
+        xhttp.open("GET",url , true);
+        xhttp.send();
+
+      }
+            
+
+  </table>
+</body>
+</html>

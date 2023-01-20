@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Text input fields</h2>
+
+<!-- <form action="http://localhost:3000/api/product_list"  method="POST"> -->
+    <form  id="form2" onsubmit="return false">
+        
+    
+  <label for="product_name">Product Name</label><br>
+  <input type="Varchar" id="product_name" name="product_name" value=""><br>
+
+  <label for="price">Price</label><br>
+  <input type="int" id="price" name="price" value=""><br>
+
+
+
+  <input type="submit" value="Submit">
+</form>
+<script>
+
+    var f1=document.getElementById("form2")
+    f1.addEventListener("submit",function(){
+    
+        var url="http://localhost:3000/api/product_list"
+        var data={
+            "product_name":document.getElementById("product_name").value,
+            "price":document.getElementById("price").value 
+        }
+        data = JSON.stringify(data)
+      var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(this.readyState === 4){
+                alert(this.responseText)
+                var rd = JSON.parse(this.responseText);
+                var insertID = rd["insertId"]
+                if(insertID){
+                    alert(insertID);
+                    window.location.href = "/add_product.html";
+    
+                }
+            }
+            
+        }
+        xhttp.open("POST",url, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        // xhttp.setRequestHeader("Content-Type", "multipart/form-data");
+    
+        xhttp.send(data);
+    }  )
+    </script>
+    </body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

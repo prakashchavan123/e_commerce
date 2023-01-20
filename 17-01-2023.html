@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p id="demo"></p>
+
+<table id="order">
+<div>
+<h1>Order no</h1>
+<p id="user_name"> User name = Arvind  </p> 
+<p id="products_name">product name = Samsung mobile </p> 
+<p id="price"> price = 150000 </p>
+<p id="address">Address = Vatsalatai Naik Nagar </p>
+</div>
+<script>
+
+var t1=document.getElementById("order")
+var p1=document.getElementById("user_name")
+    var user_id = sessionStorage.getItem("user_id")
+    var url ="http://localhost:3000/api/sign_up/" + user_id
+    var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    var p1=document.getElementById("user_name")
+        if (this.readyState === 4) {
+            var rd = this.responseText
+            rd = JSON.parse(rd)
+            console.log(rd)
+            var user_name = rd[0]["name"]
+            console.log(user_name)
+            p1.innerHTML = user_name ;
+			alert("hi")
+		}
+    }
+    xhttp.open("GET",url , true);
+    xhttp.send();
+
+
+
+    var t1=document.getElementById("order")
+var p4=document.getElementById("products_name")
+    var url ="http://localhost:3000/api/product_list" 
+    var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    var products_name=document.getElementById("product_name")
+        if (this.readyState === 4) {
+            var rd = this.responseText
+            rd = JSON.parse(rd)
+            console.log(rd)
+            var products_name = rd[0]["name"]
+            p4.innerHTML = products_name ;
+			alert("hi")
+		}
+    }
+    xhttp.open("GET",url , true);
+    xhttp.send();
+
+
+    
+    var t1=document.getElementById("order")
+    var p2=document.getElementById("price")
+    var product_price = document.getElementById("price")
+    var url ="http://localhost:3000/api/product_list"
+    var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    var p1=document.getElementById("price")
+         if (this.readyState === 4) {
+            var rd = this.responseText
+            rd = JSON.parse(rd)
+            console.log(rd)
+            var product_price = rd[0]["price"]
+            console.log(product_price)
+            p1.innerHTML = product_price ;
+			alert("hi")
+		}
+    }
+    xhttp.open("GET",url , true);
+    xhttp.send();
+
+
+    var t1=document.getElementById("order")
+    var p3=document.getElementById("address")
+    var address = document.getElementById("address")
+    var url ="http://localhost:3000/api/add_address"
+    var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    var p2=document.getElementById("address")
+         if (this.readyState === 4) {
+            var rd = this.responseText
+            rd = JSON.parse(rd)
+            console.log(rd)
+            var address = rd[0]["address"]
+            console.log(address)
+            p3.innerHTML = address;
+			alert("hi")
+		}
+    }
+    xhttp.open("GET",url , true);
+    xhttp.send();
+
+
+    
+
+
+			
+
+
+
+
+
+
+
+
+
+
+            
+</script>
+
+
+
+
+
+
+</table>
+</body>
+</html>

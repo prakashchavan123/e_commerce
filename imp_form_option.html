@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The select element</h1>
+
+<p>The select element is used to create a drop-down list.</p>
+
+<form action="/action_page.php">
+  <label for="cars">Choose a car:</label>
+  <select name="cars" id="cars">
+    <option value="1">samasung</option>
+    <option value="2">oppo</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p>Click the "Submit" button and the form-data will be sent to a page on the 
+server called "action_page.php".</p>
+
+<script>
+var s1 = document.getElementById("cars")
+var str1=""
+var data= [
+
+{"id":1,"name":"samsung"},{"id":2,"name":"oppo"},{"id":3,"name":"vivo"},{"id":5,"name":"Micromax"}
+
+]
+for(i=0; i<4; i++){   
+str1 = str1+'<option value="'+data[i]["id"]+'">'+data[i]["name"]+'</option>'
+
+}
+s1.innerHTML = str1
+
+</script>
+
+</body>
+</html>
